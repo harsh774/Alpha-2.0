@@ -1,5 +1,7 @@
 package DSA;
 
+import java.util.concurrent.locks.ReentrantLock;
+
 public class Recursion {
 
     public static boolean isSorted(int arr[], int i) {
@@ -99,6 +101,40 @@ public class Recursion {
         }
     }
 
+    public static void printBinStringwithoutconOnes(int n, int lastplace, String str){
+        //base case
+        if(n==0){
+            System.out.println(str);
+            return;
+        }
+
+        printBinStringwithoutconOnes(n-1,0,str+"0");
+        if(lastplace==0){
+            printBinStringwithoutconOnes(n-1,1,str+"1");
+        }
+    }
+
+    //length of string
+    public static int lengthofString(String str){
+        if(str.length()==0){
+            return 0;
+        }
+        return lengthofString(str.substring(1))+1;
+    }
+
+    //print string
+    
+    public static void printDigits(int number){
+        if(number==0){
+            return;
+        }
+        int lastDigit = number%10;
+        printDigits(number/10);
+        System.out.print(digits[lastDigit]+" ");
+    }
+    static String digits[] = {"zero","one","two","three","four","five","six","seven","eight","nine"};
+
+
     public static void main(String[] args) {
         // int arr[] = {8,3,6,9,5,10,2,5,3};
         // // System.out.println(isSorted(arr, 0));
@@ -109,8 +145,11 @@ public class Recursion {
         // String str = "appnnacollege";
         // removeDuplicate(str, 0, new StringBuilder(""), new boolean[26]);
 
-        // System.out.println(friendPairing(3));
-        int[] arr = {3,2,4,5,6,2,7,2,2};
-        indexNumberofKey(arr, 0, 2);
+        // // System.out.println(friendPairing(3));
+        // int[] arr = {3,2,4,5,6,2,7,2,2};
+        // // indexNumberofKey(arr, 0, 2);
+        // printBinStringwithoutconOnes(3,0,"");
+        // printDigits(3695);
+        System.out.println(lengthofString("abcdefs"));
     }
 }
