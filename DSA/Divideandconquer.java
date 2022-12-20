@@ -132,11 +132,48 @@ public class Divideandconquer {
         }
     }
 
+    //Practice Questions
+    public static int majorityElement(int nums[]){
+        int len = nums.length;
+        return majorityelementRec(nums,0,len-1);
+    }
+
+    public static int majorityelementRec(int[] nums, int low, int high){
+        //base case
+        if(low == high){
+            return nums[low];
+        }
+
+        int mid = low + (high-low)/2;
+        int left = majorityelementRec(nums, low, mid);
+        int right = majorityelementRec(nums, mid+1, high);
+
+
+        if(left == right){
+            return left;
+        }
+
+        int leftcount = countInRange(nums,left,low, high);
+        int rightcount = countInRange(nums, right, low, high);
+
+        return leftcount>rightcount? left:right;
+    }
+
+    public static int countInRange(int[] nums, int num, int low, int high){
+        int count = 0;
+        for(int i=low; i<=high; i++){
+            if(nums[i]==num){
+                count++;
+            }
+        }
+        return count;
+    }
+
     public static void main(String[] args) {
-        int arr[] = {4,5,6,7,0,1,2};
-        // mergesort(arr, 0, arr.length-1);
-        // QuickSort(arr);
+        int arr[] = {2,2,1,1,1,2,2};
+        // mergesort(,arr, 0, arr.length-1);
+        // QuickSort(a,rr);
         // printArr(arr);
-        System.out.println(search(arr, 0, 0, arr.length-1));
+        System.out.println(majorityElement(arr));
     }
 }
