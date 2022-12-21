@@ -169,11 +169,75 @@ public class Divideandconquer {
         return count;
     }
 
+    //Sort string array
+    public static String[] mergeStringSort(String[] arr){
+        String[] ans = new String[arr.length];
+        ans =  mergesortString(arr,0,arr.length-1);
+        return ans;
+    }
+
+    public static String[] mergesortString(String[] arr, int low, int high){
+        if(low == high){
+            String[] A = { arr[low] };
+            return A;
+        }
+
+        int mid = low+(high-low)/2;
+        String[] arr1 = mergesortString(arr, low, mid);
+        String[] arr2 = mergesortString(arr, mid+1, high);
+
+        String[] arr3 = mergeee(arr1,arr2);
+        return arr3;
+    }
+
+    static String[] mergeee(String[] arr1, String[] arr2){
+        int alen = arr1.length;
+        int blen = arr2.length;
+
+        String[] arr3 = new String[alen+blen];
+        int idx = 0;
+
+        int i=0,j=0;
+        while(i<alen && j<blen){
+            if(isAlphabeticallySmaller(arr1[i],arr2[j])){
+                arr3[idx++]=arr1[i++];
+            }else{
+                arr3[idx++]=arr2[j++];
+            }
+        }
+
+        while(i<alen){
+            arr3[idx++]=arr1[i++];
+        }
+        while(j<blen){
+            arr3[idx++]=arr2[j++];
+        }
+        return arr3;
+    }
+
+    static boolean isAlphabeticallySmaller(String str1, String str2){
+        if(str1.compareTo(str2)<0){
+            return true;
+        }
+        return false;
+    }
+
+
     public static void main(String[] args) {
-        int arr[] = {2,2,1,1,1,2,2};
+        // int arr[] = {2,2,1,1,1,2,2};
         // mergesort(,arr, 0, arr.length-1);
         // QuickSort(a,rr);
         // printArr(arr);
-        System.out.println(majorityElement(arr));
+        // System.out.println(majorityElement(arr));
+
+        // int arr[] = {1,0,1,1,1};
+        // System.out.println(search(arr, 0, 0, arr.[] length-1));
+
+        String[] arr = {"sun","earth","mars","mercury"};
+        String[] ans = mergeStringSort(arr);
+        for(int i=0; i<ans.length;i++){
+            System.out.println(ans[i]);
+        }
+
     }
 }
