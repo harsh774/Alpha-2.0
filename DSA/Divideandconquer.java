@@ -223,6 +223,10 @@ public class Divideandconquer {
     }
 
 
+    //Given an array of Integer. Find the inversion count in the array.
+    
+
+
     public static void main(String[] args) {
         // int arr[] = {2,2,1,1,1,2,2};
         // mergesort(,arr, 0, arr.length-1);
