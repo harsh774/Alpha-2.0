@@ -1,3 +1,4 @@
+import java.math.BigInteger;
 
 public class BackTracking {
     public static void assignanddecreasebytwo(int[] arr, int val){
@@ -42,12 +43,52 @@ public class BackTracking {
         findSubsets(str, ans, i+1);
     }
 
+    public static long factorialUsingRecursion(int n) {
+        if (n <= 2) {
+            return n;
+        }
+        return n * factorialUsingRecursion(n - 1);
+    }
+
+    // public static String[] permutaion(String str){
+    //     long len = factorialUsingRecursion(str.length());  
+    //     String[] ans = new String[(int) len];
+    //     String result = "";
+    //     for(int i=0; i<ans.length; i++){
+    //         ans[i]= permutations(str,result);
+    //     }
+    //     return ans;
+        
+              
+    // }
+
+    public static void permutations(String str, String result){
+        //base case
+        if(str.length()==0){
+            System.out.println(result);
+            return;
+        }
+
+        //recursion
+        for(int i=0; i<str.length(); i++){
+            char cur = str.charAt(i);
+            String NewStr = str.substring(0, i)+str.substring(i+1);
+            permutations(NewStr, result+cur);
+        }
+    }
+
     public static void main(String[] args) {
     //    int[] arr = new int[5];
     //    assignanddecreasebytwo(arr,1); 
         // changearr(arr, 0, 1);
         // printArr(arr);
         String str = "abc";
-        findSubsets(str, "", 0);
+        // findSubsets(str, "", 0);
+        permutations(str, "");
+        
+        
+
+
+
     }
 }
