@@ -1,5 +1,3 @@
-import javax.swing.border.Border;
-
 public class NQueens {
     public static boolean isSafe(char board[][], int row, int col){
         //vertical
