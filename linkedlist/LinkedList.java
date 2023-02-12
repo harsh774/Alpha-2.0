@@ -215,6 +215,90 @@ public class LinkedList {
         return false;
     }
 
+    public static void removeCycle(){
+        //detect cycle
+        Node slow = head, fast = head;
+        boolean cycle = false;
+        while(fast!=null && fast.next!=null){
+            slow = slow.next;
+            fast = fast.next.next;
+            if(fast==slow){
+                cycle = true;
+                break;
+            }
+        }
+        if(cycle==false){
+            return;
+        }
+
+        //Find meeting point
+        slow = head;
+        Node prev = null;
+        while(slow != fast){
+            prev = fast;
+            slow = slow.next;
+            fast = fast.next;
+        }
+        //Remove cycle -> last.next = null
+        prev.next = null;
+    }
+
+    //ZigZag Linked List
+    public void ZigZag(){
+        //finding mid
+        Node slow = head;
+        Node fast = head.next;
+        while(fast!=null && fast.next!=null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        Node mid = slow;
+
+        //reverse 2nd half
+        Node curr = mid.next;
+        mid.next = null;
+
+        Node prev = null;
+        Node next;
+        while(curr!=null){
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+
+        Node left = head;
+        Node right = prev;
+        Node nextL, nextR;
+
+        //alternate merge - Zigzag merge
+        while(left!=null && right!=null){
+            nextL = left.next;
+            left.next = right;
+            nextR = right.next;
+            right.next = nextL;
+
+            left = nextL;
+            right = nextR;
+        }
+
+    }
+
+    //Questions
+    public static Node intersectionPoint(Node list1, Node list2){
+        while(list2!=null){
+            Node temp = list1;
+            while(temp!=null){
+                if(temp==list2){
+                    return list2;
+                }
+                temp = temp.next;
+            }
+            list2 = list2.next;
+        }
+        return null;
+    }
+
     public void print(){ //O(n)
         Node temp = head;
         while(temp!=null){
@@ -243,11 +327,44 @@ public class LinkedList {
         // ll.addLast(2);
         // ll.addLast(2);
         // ll.addLast(5);
-        head = new Node(1);
-        head.next = new Node(2);
-        head.next.next = new Node(3);
-        head.next.next.next = new Node(4);
-        head.next.next.next.next = head;
-        System.out.println(isCycle());
+        // head = new Node(1);
+        // Node temp = new Node(2);
+        // head.next = temp;
+        // head.next.next = new Node(3);
+        // head.next.next.next = temp;
+        // System.out.println(isCycle());
+        // removeCycle();
+        // System.out.println(isCycle());
+
+        // ll.addLast(1);
+        // ll.addLast(2);
+        // ll.addLast(3);
+        // ll.addLast(4);
+        // ll.addLast(5);
+        // ll.addLast(6);
+        // ll.print();
+        // ll.ZigZag();
+        // ll.print();
+
+        Node head1 ,head2;
+        head1 = new Node(10);
+        head2 = new Node(3);
+        Node newNode = new Node(6);
+        head2.next = newNode;
+        newNode = new Node(9);
+        head2.next.next = newNode;
+        newNode = new Node(15);
+        head1.next = newNode;
+        head2.next.next.next = newNode;
+
+        newNode = new Node(30);
+        head1.next.next = newNode;
+        head1.next.next.next = null;
+        Node intersectionPoint = ll.intersectionPoint(head1, head2);
+        if(intersectionPoint==null){
+            System.out.println("NO INTERSECTION POINT");
+        }else{
+            System.out.print("Intersection Point: "+intersectionPoint.data);
+        }
     }
 }
