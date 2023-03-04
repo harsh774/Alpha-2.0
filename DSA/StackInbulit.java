@@ -57,6 +57,64 @@ public class StackInbulit {
         }
     }
 
+    //nextGreaterElement O(n) 
+    public static void nextGreaterElements(int[] arr, int[] G){
+        Stack<Integer> s = new Stack<>();
+        for(int i=arr.length-1; i>=0; i--){
+            while(!s.isEmpty()&& arr[s.peek()]<=arr[i]){
+                s.pop();
+            }
+            if(s.isEmpty()){
+                G[i]=-1;
+            }else{
+                G[i]=arr[s.peek()];
+            }
+            
+            s.push(i);
+        }
+    }
+    //validParanthesis O(n)
+    public static boolean isValidPar(String str){
+        Stack<Character> s = new Stack<>();
+        for(int i=0; i<str.length(); i++){
+            char ch = str.charAt(i);
+            if(ch=='('||ch=='{'||ch=='['){
+                s.push(ch);
+            }else{
+                if(s.isEmpty()){
+                    return false;
+                }
+                if((s.peek()=='(' && ch==')') || (s.peek()=='{' && ch=='}') || (s.peek()=='[' && ch==']')){
+                    s.pop();
+                }else{
+                    return false;
+                }
+            }
+
+        }
+        if(s.isEmpty()){
+            return true;
+        }else return false;
+    }
+
+    //Duplicate Paranthesis 
+    public static boolean isDuplicate(String str){
+        Stack<Character> s = new Stack<>();
+        for(int i=0; i<str.length(); i++){
+            char ch = str.charAt(i);
+            
+            //closing 
+            if(ch==')'){
+                int count = 0;
+                while(s.pop()!='('){
+                    count++;
+                }
+                if(count<1) return true; //duplicate found
+            }else s.push(ch);
+        }
+        return false;
+    }
+
     public static void printStack(Stack<Integer> s){
         while(!s.isEmpty()){
             System.out.println(s.pop());
@@ -75,12 +133,24 @@ public class StackInbulit {
         // printStack(s);
         // reverseStack(s);
         // printStack(s);
-        int stocks[] = {100,80,60,70,60,85,100};
-        int span[] = new int[stocks.length];
-        stockSpan(stocks, span);
-        for(int i=0; i<span.length; i++){
-            System.out.println(span[i]+" ");
-        }
+        // int stocks[] = {100,80,60,70,60,85,100};
+        // int span[] = new int[stocks.length];
+        // stockSpan(stocks, span);
+        // for(int i=0; i<span.length; i++){
+        //     System.out.println(span[i]+" ");
+        // }
+        // int arr[] = {4,6,0,9,2,1};
+        // int nextGreater[] = new int[arr.length];
+        // nextGreaterElements(arr, nextGreater);
+        // for(int i=0; i<nextGreater.length; i++){
+        //     System.out.print(nextGreater[i]+" ");
+        // }
+        // System.out.println();
+        // String str = "({})[]";
+        // System.out.println(isValidPar(str));
+        String str = "((a+b)+(c+d))";
+        System.out.println(isDuplicate(str));
+
         
         
     }
