@@ -52,7 +52,7 @@ public class CheapestFlight {
         }
 
         Queue<Info> q = new LinkedList<>();
-        q.add(new Info(0, 0, 0));
+        q.add(new Info(src, 0, 0));
 
         while (!q.isEmpty()) {
             Info curr = q.remove();
@@ -102,85 +102,3 @@ public class CheapestFlight {
         System.out.println(CheapestFlightK(n, flights, src, dst, k));
     }
 }
-
-// leetcode one test case not passed
-
-// class Pair {
-// int vertex;
-// int cost;
-
-// public Pair(int vertex, int cost) {
-// this.vertex = vertex;
-// this.cost = cost;
-// }
-// }
-
-// class Tuple {
-// int stops;
-// int node;
-// int distance;
-
-// Tuple(int stops, int node, int distance) {
-// this.stops = stops;
-// this.node = node;
-// this.distance = distance;
-// }
-// }
-// class Solution {
-// public int findCheapestPrice(int n, int[][] flights, int src, int dst, int k)
-// {
-// // Create the adjacency list to represent airports and flights in
-// // the form of a graph.
-// ArrayList<ArrayList<Pair>> adjacencyList = new ArrayList<>();
-// for (int i = 0; i < n; i++) {
-// adjacencyList.add(new ArrayList<>());
-// }
-// int m = flights.length;
-// for (int i = 0; i < m; i++) {
-// adjacencyList.get(flights[i][0]).add(new Pair(flights[i][1], flights[i][2]));
-// }
-// // Create a queue which stores the node and their distances from the
-// // source in the form of {stops, {node, dist}} with ‘stops’ indicating
-// // the no. of nodes between src and current node.
-// Queue<Tuple> queue = new LinkedList<>();
-// queue.add(new Tuple(0, src, 0));
-
-// // Distance array to store the updated distances from the source.
-// int[] distances = new int[n];
-// for (int i = 0; i < n; i++) {
-// distances[i] = Integer.MAX_VALUE;
-// }
-
-// distances[src] = 0;
-
-// // Iterate through the graph using a queue, similar to Dijkstra's algorithm,
-// // by removing the element with the minimum number of stops first.
-// while (!queue.isEmpty()) {
-// Tuple current = queue.peek();
-// queue.remove();
-// int stops = current.stops;
-// int currentNode = current.node;
-// int currentCost = current.distance;
-// // Stop the process as soon as the limit for the number of stops is reached.
-// if (stops > k) continue;
-
-// for (Pair neighbor : adjacencyList.get(currentNode)) {
-// int adjacentNode = neighbor.vertex;
-// int edgeWeight = neighbor.cost;
-
-// // Update the queue and distances array if the new calculated distance is
-// // less than the previous distance and the number of stops is within limits.
-// if (currentCost + edgeWeight < distances[adjacentNode]) {
-// distances[adjacentNode] = currentCost + edgeWeight;
-// queue.add(new Tuple(stops + 1, adjacentNode, distances[adjacentNode]));
-// }
-// }
-// }
-
-// // If the destination node is unreachable, return '-1',
-// // otherwise return the calculated distance from the source to the
-// destination.
-// if (distances[dst] == Integer.MAX_VALUE) return -1;
-// return distances[dst];
-// }
-// }
