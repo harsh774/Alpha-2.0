@@ -1,3 +1,4 @@
+package back_tracking;
 public class SudokuSol {
     public static boolean isSafe(int[][] sudoku, int row, int col, int digit){
         //column

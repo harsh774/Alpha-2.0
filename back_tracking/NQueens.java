@@ -1,3 +1,4 @@
+package back_tracking;
 public class NQueens {
     public static boolean isSafe(char board[][], int row, int col){
         //vertical

@@ -1,3 +1,4 @@
+package bianary_tree;
 import java.util.*;
 
 public class bst {

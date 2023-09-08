@@ -1,3 +1,4 @@
+package bianary_tree;
 public class mirrorBST {
     static class Node{
         int data;
